@@ -131,14 +131,13 @@ html{
 /*Algemene styling*/
 body{
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    /* display: flex;
+    flex-direction: column; */
     font-family: var(--ff-base);
     font-size: var(--fs-400);
-    line-height: 1.6;
     color: var(--clr-text-body);
     background-color: var(--clr-background);
-    align-items: center;
+    /* align-items: center; */
 }
 
 main{
@@ -585,9 +584,6 @@ footer section h4{
     margin: var(--margin-top-bottom);
 }
 
-footer section a, footer section p{
-    margin: var(--margin-top-bottom);
-}
 
 footer a{
     text-decoration: none;
@@ -597,8 +593,20 @@ footer h4, footer p, footer a{
     color: var(--clr-background);
 }
 
-/* Links and CTA's */
+footer ul{
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    gap: 1rem;
+}
 
+/* Links and CTA's */
+button, a{
+    all: unset;
+    display: inline-block;
+    cursor: pointer;
+    text-decoration: none;
+}
 .call-to-action{
     top: 50%;
     background-color: var(--clr-primary);
@@ -729,20 +737,40 @@ footer h4, footer p, footer a{
     }
 
 .button {
-    cursor: pointer;
-    display: inline-block;
-    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
     color: var(--clr-text);
     font-size: var(--fs-300);
     background-color: var(--clr-primary);
-    padding: .5em 1.25em;
+    padding: .5em .5em;
     border-radius: .25em;
 }
+
+.button .icon{
+    display: block;
+}
+
+.button span{
+    display: block;
+}
+
 
 .button:hover,
 .button:focus{
     background-color: var(--clr-secondary);
 }
+
+.footer_linkedin{
+    background-color: blue;
+}
+
+.footer_linkedin:hover,
+.footer_linkedin:focus
+{
+    background-color: darkblue;
+}
+
 
 
 @media(min-width:25.5em) and (max-width: 62.5em){
