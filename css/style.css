@@ -142,12 +142,15 @@ body{
     font-size: var(--fs-400);
     color: var(--clr-text-body);
     background-color: var(--clr-background);
+
+    min-height: 100vh;
     /* align-items: center; */
 }
 
 main{
     width: min(100% - 3rem, 55ch);
     margin-inline: auto;
+    flex-grow: 1;
 }
 
 /* Links and CTA's */
@@ -389,10 +392,6 @@ input[type="checkbox"].toggle:checked + label::after{
 
 /*  Homepage Styling */
 
-section{
-    padding-top: var(--normal-padding);
-}
-
 h1, h2, h3{
     font-family: var(--ff-accent);
     line-height: 1.1;
@@ -584,11 +583,13 @@ footer{
     width: 100%;
     text-align: center;
     padding: var(--padding-website);
+    flex-grow: 1;
+    align-content: center;
 }
 
 footer section h4{
     font-size: var(--font-size-h4);
-    margin: var(--margin-top-bottom);
+    margin-bottom: var(--normal-margin);
 }
 
 
@@ -769,6 +770,10 @@ footer ul{
     background-color: #0077B5;
 }
 
+.footer_linkedin span{
+    font-weight: bold;
+}
+
 .footer_linkedin:hover,
 .footer_linkedin:focus
 {
@@ -818,6 +823,13 @@ footer ul{
     opacity: 1;
 }
 
+
+/* Contact */
+.contact-naam{
+    font-weight: bold;
+}
+
+
 @media(min-width:25.5em) and (max-width: 62.5em){
     div.about-me-extra-photo{
         display: none;
@@ -825,7 +837,7 @@ footer ul{
 
 }
 
-/* Desktop screensize */
+/* tablet screensize */
 @media(min-width: 45em){
     main{
         width: 100%;
@@ -1117,8 +1129,15 @@ footer ul{
     footer section ul{
         flex-direction: row;
     }
+
+    /* Contact Tablet */
+    .contact-informatie{
+        max-width: none;
+        width: calc(100vw - 3rem);
 }
 
+
+/* Desktop screensize */
 @media(min-width: 62.5em){
     nav{
         background: var(--clr-background-gradient);
