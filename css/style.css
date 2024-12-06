@@ -135,9 +135,9 @@ html{
 
 /*Algemene styling*/
 body{
-    min-height: 100vh;
-    /* display: flex;
-    flex-direction: column; */
+    /* min-height: 100vh; */
+    display: flex;
+    flex-direction: column;
     font-family: var(--ff-base);
     font-size: var(--fs-400);
     color: var(--clr-text-body);
@@ -146,9 +146,16 @@ body{
 }
 
 main{
-    padding-top: 1.5em;
     width: min(100% - 3rem, 55ch);
     margin-inline: auto;
+}
+
+/* Links and CTA's */
+button, a{
+    all: unset;
+    /* display: inline-block; */
+    cursor: pointer;
+    text-decoration: none;
 }
 
 
@@ -181,25 +188,20 @@ a:focus{
 
 /* Navigation Styling */
 header{
-    margin: 1em;
-    z-index: 2;
-}
-
-nav{
-    padding: 1em 1em 2em 1em;
-    display: flex;
-    justify-content: flex-end;
-    background-color: var(--clr-background);
-    position: fixed;
+    position: sticky;
     width: 100vw;
     top: 0;
     left: 0;
 }
 
-nav .logo{
-    left: 1em;
-    position: absolute;
+nav{
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--clr-background);
 }
+
 
 .hamburger-menu {
     display: flex;
@@ -285,7 +287,7 @@ nav .logo{
     list-style-type: none;
     letter-spacing: .1em;
     line-height: 2em;
-    font-size: 2em;
+    font-size: var(--fs-600);
     font-weight: bold;
 }
 
@@ -605,13 +607,7 @@ footer ul{
     gap: 1rem;
 }
 
-/* Links and CTA's */
-button, a{
-    all: unset;
-    display: inline-block;
-    cursor: pointer;
-    text-decoration: none;
-}
+
 .call-to-action{
     top: 50%;
     background-color: var(--clr-primary);
@@ -1135,21 +1131,36 @@ button, a{
     .toonMenu{
         transform: translateX(0%);
         background:none;
-        font-size: .4em;
+
+        display: flex;
+        flex-direction: column-reverse;
+        height: auto;
+        gap: 1rem;
+
+        padding: 1rem;
     }
 
+    .toonMenu ul{
+        padding: 0;
+    }
+
+    .toonMenu ul li{
+        font-size: var(--fs-400);
+    }
     .toonMenu ul li a:hover{
         font-size: var(--fs-400);
     }  
 
     .color-picker{
-        position: absolute;
-        top: 1em;
-        left: 3em;
+        font-size: var(--fs-300);
     }
 
     .color-picker label{
         display: hidden;
+    }
+
+    .color-picker > fieldset {
+        width: auto;
     }
 
     .hide{
