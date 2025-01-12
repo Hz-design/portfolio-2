@@ -5,11 +5,13 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    scroll-behavior: smooth;
 }
 
 html{
     color-scheme: light dark;
-    scroll-behavior: smooth;
+    width: 100%;
+    height: 100%;
 }
 
 @media(prefers-color-scheme: dark){
@@ -86,12 +88,13 @@ html{
     --ff-base: 'Open Sans', sans-serif; 
     --ff-accent:'Montserrat', sans-serif;
 
-    --fs-300: clamp(1.13rem, calc(1.08rem + 0.22vw), 1.25rem);
-    --fs-400: clamp(1.35rem, calc(1.20rem + 0.73vw), 1.77rem);
-    --fs-500: clamp(1.62rem, calc(1.31rem + 1.53vw), 2.50rem);
-    --fs-600: clamp(1.94rem, calc(1.39rem + 2.77vw), 3.53rem);
-    --fs-700: clamp(2.33rem, calc(1.41rem + 4.63vw), 5.00rem);
-    --fs-800: clamp(2.80rem, calc(1.32rem + 7.42vw), 7.07rem);
+    --fs-300: clamp(1rem, calc(0.95rem + 0.15vw), 1.125rem);
+    --fs-400: clamp(1.125rem, calc(1rem + 0.5vw), 1.5rem);
+    --fs-500: clamp(1.25rem, calc(1.05rem + 1vw), 2rem);
+    --fs-600: clamp(1.5rem, calc(1.1rem + 1.5vw), 2.5rem);
+    --fs-700: clamp(1.75rem, calc(1.15rem + 2.5vw), 3rem);
+    --fs-800: clamp(2rem, calc(1.2rem + 4vw), 4rem);
+    
 
     --button-color:#fff;
     --button-background-color:#fff;
@@ -148,9 +151,9 @@ body{
 }
 
 main{
-    width: min(100% - 3rem, 55ch);
     margin-inline: auto;
     flex-grow: 1;
+    padding: 0 5vw;
 }
 
 /* Links and CTA's */
@@ -195,6 +198,7 @@ header{
     width: 100vw;
     top: 0;
     left: 0;
+    z-index: 99999;
 }
 
 nav{
@@ -414,7 +418,13 @@ h3{
     color: var(--clr-text);
 }
 
+section{
+    width: 100%;
+}
 
+.page{
+    padding: 0 1rem;
+}
 section h1{
     padding-bottom: .5em;
 }
@@ -632,8 +642,16 @@ footer ul{
 }
 
 /* About me */
+div.about-me{
+    justify-self: center;
+    padding: 1rem 0;
+}
+
+.about-me-text{
+    padding: 1rem 0;
+}
 .about-me-text p{
-    margin: 1em 0;
+    margin: .8rem 0;
 }
 
 .about-me-h1{
@@ -770,7 +788,7 @@ footer ul{
     background-color: #0077B5;
 }
 
-.footer_linkedin span{
+.footer_linkedin span:first-of-type{
     font-weight: bold;
 }
 
@@ -829,6 +847,121 @@ footer ul{
     font-weight: bold;
 }
 
+/* Hybrid scrolling about me */
+.scroll_container{
+    height: 230vh;
+    width: 100%;
+    padding: 5rem 0;
+}
+
+.horizontal_scroll{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    display: flex;
+    gap: 1rem;
+
+    /* https://css-shape.com/film-strip/ */
+    --s: 12px; /* control the size */
+    --c: #222;
+    
+    width: calc(20*var(--s));
+    aspect-ratio: 1.25;
+    background: 
+        conic-gradient(at 50% var(--s),var(--c) 75%,#0000 0) 
+        0 0/calc(2*var(--s)) calc(100% - var(--s)) padding-box;
+    border: var(--s) solid var(--c);
+    padding: calc(var(--s)*2.5) calc(var(--s)*1.5);
+    /* box-sizing: content-box; */
+
+}
+
+.scroll_contents{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+
+    position: relative;
+    height: 100%;
+    width: 100%;
+    min-width: fit-content;
+}
+
+.scroll_contents figure{
+    width: auto;
+    height: 100%;
+}
+
+.scroll_content-photo.filter{
+    filter: sepia(1) brightness(0.9) grayscale(.2);
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s; /* Delayed visibility change */
+}
+
+.scroll_contents figure img{
+    width: auto;
+    height: 100%;
+}
+
+.scroll_contents-text{
+    visibility: hidden;
+    opacity: 0; /* Fully transparent initially */
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s; /* Delayed visibility change */
+    pointer-events: none;
+    position: absolute;
+    bottom: 0;
+    padding: 1rem .3rem;
+    flex-direction: column;
+    width: 100%;
+
+    background: var(--clr-background-card-gradient);
+}
+
+
+.scroll_contents-text.visible{
+    visibility: visible;
+    opacity: 1; /* Fully visible */
+    transition: opacity 0.3s ease, visibility 0s linear 0s; /* Remove visibility delay when showing */
+}
+
+.scroll_contents-text h2{
+    padding: 0;
+    font-size: var(--fs-500);
+}
+
+.scroll_contents-text h3{
+    font-size: var(--fs-400);
+}
+
+.scroll_contents-text ul li{
+    font-size: var(--fs-300);
+}
+
+.sticky_wrap{
+    overflow: hidden;
+    position: sticky;
+    top: 10vh;
+    height: 80vh;
+}
+
+.about-me__roc {
+    background: center / contain no-repeat url('../img/about-me-roc.png');
+  }
+  
+.about-me__sweden {
+background: center / contain no-repeat url('../img/about-me-sweden.png');
+}
+  
+.about-me__denhaag {
+background: center / contain no-repeat url('../img/about-me-denhaag.png');
+}
+
+.about-me__geslaagd {
+    background: center / contain no-repeat url('../img/about-me-geslaagd.png');
+}
+
+.about-me__tussenjaar {
+    background: center / contain no-repeat url('../img/about-me-tussenjaar.png');
+}
 
 @media(min-width:25.5em) and (max-width: 62.5em){
     div.about-me-extra-photo{
@@ -845,15 +978,16 @@ footer ul{
         flex-direction: column;
         justify-content: center;
         align-items: center;
+
     }
-        
+
     section{
-        max-width: 30em;
+        /* max-width: 30em; */
         display: flex;
         flex-direction: column;
         align-items: center;
     }
-
+    
     .homepage-header,
     .homepage-header-text{
         align-items: baseline;
@@ -1054,52 +1188,49 @@ footer ul{
         width: 100vw;
         max-width: none;
     }
-
+/* 
     .homepage-header-text img{
         width:min(70% - 7em, 55ch);
+    } */
+
+    /* About me tablet en groter*/
+    section.about-me{
+
+        max-width: none;
+        padding:0 2rem;
     }
+
+    section.about-me div{
+        display: flex;
+        flex-direction: column;
+
+        min-height: 90vh;
+    }
+
+    section.about-me div .about-me-h1{
+        font-size: var(--fs-700);
+        flex-grow: 1;
+    }
+
+    section.about-me div p{
+        flex-grow: 1;
+        max-width: 40vw;
+        align-self: self-end;
+    }
+
 
     section.about-me-section{
         display: flex;
         flex-direction: row;
-        max-height: 25em;
         overflow: hidden;
-    }
-
-    .about-me-section figure{
-        max-width: 15em;
-        max-height: 25em;
-
-    }
-
-    .about-me-section img{
-        width: 100%;
-        height: auto;
-    }
-
-    .about-me-extra-photo{
-        max-height: 25em;
-        padding-left: .5em;
-
-    }
-
-    .about-me-extra-photo figure{
-        max-height: 12em;
-        margin: .5em;
-        height: 100%;
-        overflow: hidden;
-        position: relative;
-    }
-
-    .about-me-extra-photo figure img{
-        object-fit: fill;
-        height: 100%;
-        min-height: 250px
     }
 
     section.about-me-text{
         align-items: baseline;
-        max-width: 29em;
+    }
+
+    .about-me-text p{
+        margin: .3rem 0;
     }
 
     aside.photo-box{
@@ -1152,7 +1283,8 @@ footer ul{
         background:none;
 
         display: flex;
-        flex-direction: column-reverse;
+        flex-direction: row;
+        align-items: center;
         height: auto;
         gap: 1rem;
 
@@ -1161,6 +1293,9 @@ footer ul{
 
     .toonMenu ul{
         padding: 0;
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
     }
 
     .toonMenu ul li{
@@ -1201,4 +1336,5 @@ footer ul{
         scroll-behavior: auto !important;
         transition-delay: 0ms !important;
     }
+}
 }

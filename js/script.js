@@ -1,7 +1,7 @@
 // Navigation menu
-var menu = document.querySelector('.hamburger-menu');
-var deNav = document.querySelector('.toonMenu');
-var toggleOff = document.querySelector('.toggle-off');
+const menu = document.querySelector('.hamburger-menu');
+const deNav = document.querySelector('.toonMenu');
+const toggleOff = document.querySelector('.toggle-off');
 
 menu.addEventListener('click', toggleMenu);
 
@@ -60,15 +60,15 @@ toggle.addEventListener("click", () => {
 //Functie reveal, wanneer de gebruiker scrollend de viewport binnenkomt wordt er een class toegevoegd aan de element of verwijderd.
 function reveal(){
     //hiermee wordt de onderdeel geselecteerd, welk item er gerevealed moet worden.
-    var reveals = document.querySelectorAll(".revealer");
+    let reveals = document.querySelectorAll(".revealer");
     
-    for (var i = 0; i < reveals.length; i++){
+    for (let i = 0; i < reveals.length; i++){
       //windowHeight is de hoogte van de viewport
-      var windowHeight = window.innerHeight;
+      let windowHeight = window.innerHeight;
       //elementTop is de afstand van de geselecteerde element vanaf bovenaan de viewport of de lengte dat er is gescrollt 
-      var elementTop = reveals[i].getBoundingClientRect().top;
+      let elementTop = reveals[i].getBoundingClientRect().top;
       //elementVisible is de hoogte wanneer het element wordt getoond aan de gebruiker
-      var elementVisible = 150;
+      let elementVisible = 150;
       //de if statement zorgt ervoor wanneer de class moet worden toegekend of moet worden verwijderd.
       if(elementTop < windowHeight - elementVisible){
         reveals[i].classList.add("active");
@@ -81,7 +81,52 @@ function reveal(){
   //eventListener zorgt ervoor dat de gebruiker met de scroll beweging de functie activeert.
   window.addEventListener("scroll", reveal);
 
-/* Bronnen lijst 
-Chat GPT & 
 
-*/
+// Hybrid Scrolling
+const stickySections = [...document.querySelectorAll('.sticky_wrap')]
+
+window.addEventListener('scroll', (e) => {
+  for(let i = 0; i < stickySections.length; i++){
+    transform(stickySections[i])
+  }
+})
+
+function transform(section) {
+
+  const offsetTop = section.parentElement.offsetTop;
+
+  const scrollSection = section.querySelector('.horizontal_scroll')
+
+  let percentage = ((window.scrollY - offsetTop) / window.innerHeight) * 100;
+
+  percentage = percentage < 0 ? 0 : percentage > 300 ? 300 : percentage;
+
+  scrollSection.style.transform = `translate3d(${-(percentage)}vw, 0, 0)`
+}
+
+
+// Scroll contents on hover show information
+const scrollContentPhotos = document.querySelectorAll('.scroll_content-photo');
+
+// Loop through each element and add event listeners
+scrollContentPhotos.forEach((photo, index) => {
+
+  photo.addEventListener('mouseover', () => {
+    // Show specific information for this photo
+      const infoElement = document.querySelector(`#info-${index}`);
+      const photoFilter = document.querySelector(`.scroll_content-photo`);
+      if (infoElement) {
+        scrollContentPhotos[index].classList.remove('filter');
+        infoElement.classList.add('visible'); // Make the info visible
+      }
+  });
+
+  photo.addEventListener('mouseout', () => {
+    // Hide the specific information when hover ends
+      const infoElement = document.querySelector(`#info-${index}`);
+      if (infoElement) {
+        scrollContentPhotos[index].classList.add('filter');
+        infoElement.classList.remove('visible'); // Hide the info
+      }
+  });
+});
