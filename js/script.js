@@ -85,11 +85,13 @@ function reveal(){
 // Hybrid Scrolling
 const stickySections = [...document.querySelectorAll('.sticky_wrap')]
 
-window.addEventListener('scroll', (e) => {
-  for(let i = 0; i < stickySections.length; i++){
-    transform(stickySections[i])
-  }
-})
+if (window.matchMedia('(min-width: 45em)').matches){
+  window.addEventListener('scroll', (e) => {
+    for(let i = 0; i < stickySections.length; i++){
+      transform(stickySections[i])
+    }
+  })
+}
 
 function transform(section) {
 

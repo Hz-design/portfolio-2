@@ -422,9 +422,6 @@ section{
     width: 100%;
 }
 
-.page{
-    padding: 0 1rem;
-}
 section h1{
     padding-bottom: .5em;
 }
@@ -446,6 +443,8 @@ section h1{
 .homepage-header-text p{
     margin: var(--margin-top-bottom);
     font-size: var(--font-size-homepage-header-text);
+    max-width: 65ch;
+    margin: 0 auto;
 }
 
 .homepage-recent-work{
@@ -645,6 +644,10 @@ footer ul{
 div.about-me{
     justify-self: center;
     padding: 1rem 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 .about-me-text{
@@ -656,6 +659,12 @@ div.about-me{
 
 .about-me-h1{
     font-size: var(--fs-600);
+}
+
+.horizontal_scroll{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
 
 
@@ -847,101 +856,6 @@ div.about-me{
     font-weight: bold;
 }
 
-/* Hybrid scrolling about me */
-.scroll_container{
-    height: 230vh;
-    width: 100%;
-    padding: 5rem 0;
-}
-
-.horizontal_scroll{
-    position: absolute;
-    top: 0;
-    height: 100%;
-    display: flex;
-    gap: 1rem;
-
-    /* https://css-shape.com/film-strip/ */
-    --s: 12px; /* control the size */
-    --c: #222;
-    
-    width: calc(20*var(--s));
-    aspect-ratio: 1.25;
-    background: 
-        conic-gradient(at 50% var(--s),var(--c) 75%,#0000 0) 
-        0 0/calc(2*var(--s)) calc(100% - var(--s)) padding-box;
-    border: var(--s) solid var(--c);
-    padding: calc(var(--s)*2.5) calc(var(--s)*1.5);
-    /* box-sizing: content-box; */
-
-}
-
-.scroll_contents{
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
-
-    position: relative;
-    height: 100%;
-    width: 100%;
-    min-width: fit-content;
-}
-
-.scroll_contents figure{
-    width: auto;
-    height: 100%;
-}
-
-.scroll_content-photo.filter{
-    filter: sepia(1) brightness(0.9) grayscale(.2);
-    transition: opacity 0.3s ease, visibility 0s linear 0.3s; /* Delayed visibility change */
-}
-
-.scroll_contents figure img{
-    width: auto;
-    height: 100%;
-}
-
-.scroll_contents-text{
-    visibility: hidden;
-    opacity: 0; /* Fully transparent initially */
-    transition: opacity 0.3s ease, visibility 0s linear 0.3s; /* Delayed visibility change */
-    pointer-events: none;
-    position: absolute;
-    bottom: 0;
-    padding: 1rem .3rem;
-    flex-direction: column;
-    width: 100%;
-
-    background: var(--clr-background-card-gradient);
-}
-
-
-.scroll_contents-text.visible{
-    visibility: visible;
-    opacity: 1; /* Fully visible */
-    transition: opacity 0.3s ease, visibility 0s linear 0s; /* Remove visibility delay when showing */
-}
-
-.scroll_contents-text h2{
-    padding: 0;
-    font-size: var(--fs-500);
-}
-
-.scroll_contents-text h3{
-    font-size: var(--fs-400);
-}
-
-.scroll_contents-text ul li{
-    font-size: var(--fs-300);
-}
-
-.sticky_wrap{
-    overflow: hidden;
-    position: sticky;
-    top: 10vh;
-    height: 80vh;
-}
 
 .about-me__roc {
     background: center / contain no-repeat url('../img/about-me-roc.png');
@@ -1194,6 +1108,11 @@ background: center / contain no-repeat url('../img/about-me-denhaag.png');
     } */
 
     /* About me tablet en groter*/
+    div.about-me{
+        max-width: 65ch;
+        margin: 0 auto;
+    }
+
     section.about-me{
 
         max-width: none;
@@ -1226,12 +1145,126 @@ background: center / contain no-repeat url('../img/about-me-denhaag.png');
     }
 
     section.about-me-text{
+        max-width: 65ch;
         align-items: baseline;
     }
 
     .about-me-text p{
         margin: .3rem 0;
     }
+
+/* Hybrid scrolling about me */
+.scroll_container{
+    height: 230vh;
+    width: 100%;
+    padding: 5rem 0;
+}
+
+.horizontal_scroll{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+
+    /* https://css-shape.com/film-strip/ */
+    --s: 12px; /* control the size */
+    --c: #222;
+    
+    width: calc(20*var(--s));
+    aspect-ratio: 1.25;
+    background: 
+        conic-gradient(at 50% var(--s),var(--c) 75%,#0000 0) 
+        0 0/calc(2*var(--s)) calc(100% - var(--s)) padding-box;
+    border: var(--s) solid var(--c);
+    padding: calc(var(--s)*2.5) calc(var(--s)*1.5);
+    /* box-sizing: content-box; */
+
+}
+
+.scroll_contents{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+
+    position: relative;
+    height: 100%;
+    width: 100%;
+    min-width: fit-content;
+}
+
+.scroll_contents ul li{
+    list-style-type:none;
+}
+
+.scroll_contents .school-logo{
+    max-height: 3rem;
+    width: auto;
+    height: 100%;
+    background-color: #fff;
+    border: 2px solid #fff;
+    margin: .5rem 0;
+}
+
+.scroll_contents figure{
+    width: auto;
+    height: 100%;
+}
+
+.scroll_content-photo.filter{
+    filter: sepia(1) brightness(0.9) grayscale(.2);
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s; /* Delayed visibility change */
+}
+
+.scroll_contents figure img{
+    width: auto;
+    height: 100%;
+}
+
+.scroll_contents-text{
+    visibility: hidden;
+    opacity: 0; /* Fully transparent initially */
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s; /* Delayed visibility change */
+    pointer-events: none;
+    position: absolute;
+    bottom: 0;
+    padding: 1.5rem 1rem;
+    flex-direction: column;
+    width: 100%;
+
+    background: var(--clr-background-card-gradient);
+}
+
+
+.scroll_contents-text.visible{
+    visibility: visible;
+    opacity: 1; /* Fully visible */
+    transition: opacity 0.3s ease, visibility 0s linear 0s; /* Remove visibility delay when showing */
+}
+
+.scroll_contents-text h2{
+    padding: 0;
+    font-size: var(--fs-500);
+}
+
+.scroll_contents-text h3{
+    font-size: var(--fs-400);
+}
+
+.scroll_contents-text ul li{
+    font-size: var(--fs-300);
+}
+
+.sticky_wrap{
+    /* overflow: hidden; */
+    position: sticky;
+    top: 10vh;
+    height: 80vh;
+}
+
+
 
     aside.photo-box{
         position: absolute;
